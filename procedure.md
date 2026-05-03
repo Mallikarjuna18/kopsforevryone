@@ -16,6 +16,7 @@ export AWS_REGION=us-east-1 #change to your desired AWS region
 export CLUSTER_NAME=pennedbyarjun.blog #change to your cluster name
 10. Deploy Kubernetes Server with KOPS.
 11. Run the below command by your name and s3 url node and master of your choice
+
 kops create cluster --name=<clusterName> --state=<S3 bucket url> \
     --zones=<desired zones> --node-count=<worker node count> --control-plane-count=<control pane count> \
     --node-size=<required node size> --control-plane-size=<control pans size> --control-plane-zones=<control pane zone> \
