@@ -17,17 +17,22 @@ export CLUSTER_NAME=pennedbyarjun.blog #change to your cluster name
 10. Deploy Kubernetes Server with KOPS.
 11. Run the below command by your name and s3 url node and master of your choice
 
-kops create cluster --name=<clusterName> --state=<S3 bucket url> \
+    kops create cluster --name=<clusterName> --state=<S3 bucket url> \
     --zones=<desired zones> --node-count=<worker node count> --control-plane-count=<control pane count> \
     --node-size=<required node size> --control-plane-size=<control pans size> --control-plane-zones=<control pane zone> \
     --control-plane-volume-size <voule size required> --node-volume-size <voule size required> --ssh-public-key <ssh keys location> --dns-zone=<dns zone you have created in route 53> --networking calico --dry-run -o yaml
-Example:
-kops create cluster --name=pennedbyarjun.blog --state=s3://k8spractisebucketbyarjun \
+
+    Example:
+    kops create cluster --name=pennedbyarjun.blog --state=s3://k8spractisebucketbyarjun \
     --zones=us-east-1a,us-east-1b,us-east-1c --node-count=3 --control-plane-count=1 \
     --node-size=t3.medium --control-plane-size=t3.medium --control-plane-zones=us-east-1a \
-    --control-plane-volume-size 15 --node-volume-size 15 --ssh-public-key ~/.ssh/id_ed25519.pub --dns-zone=pennedbyarjun.blog --networking calico --dry-run -o yaml
-12. If you remove dry run flag and can give yes to proceed or if you want any changes copy that yaml and edit in the yaml file.
-13. kops update cluster --name <change to your cluster name> --yes --admin --state <change to your S3 bucket name>
-Ex : kops update cluster --name pennedbyarjun.blog --yes --admin --state s3://k8spractisebucketbyarjun
-Note : this Yaml file need to run on Admintrator Instance
+    --control-plane-volume-size 15 --node-volume-size 15 --ssh-public-key ~/.ssh/id_ed25519.pub --dns-zone=pennedbyarjun.blog --networking         calico --dry-run -o yaml
+
+13. If you remove dry run flag and can give yes to proceed or if you want any changes copy that yaml and edit in the yaml file.
+
+14. kops update cluster --name <change to your cluster name> --yes --admin --state <change to your S3 bucket name>
+  
+      Ex : kops update cluster --name pennedbyarjun.blog --yes --admin --state s3://k8spractisebucketbyarjun
+      Note : this Yaml file need to run on Admintrator Instance
+
 14. kops delete cluster --name pennedbyarjun.blog --yes
