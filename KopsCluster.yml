@@ -1,7 +1,7 @@
 apiVersion: kops.k8s.io/v1alpha2
 kind: Cluster
 metadata:
-  name: pennedbyarjun.blog
+  name: pennedbyarjun.blog #change name accordingly
 spec:
   api:
     dns: {}
@@ -9,8 +9,8 @@ spec:
     rbac: {}
   channel: stable
   cloudProvider: aws
-  configBase: s3://k8spractisebucketbyarjun/pennedbyarjun.blog
-  dnsZone: pennedbyarjun.blog
+  configBase: s3://k8spractisebucketbyarjun/pennedbyarjun.blog #provide your S3 bucket name
+  dnsZone: pennedbyarjun.blog #change to your domain name
   etcdClusters:
   - cpuRequest: 200m
     etcdMembers:
@@ -35,31 +35,31 @@ spec:
     legacy: false
   kubelet:
     anonymousAuth: false
-  kubernetesApiAccess:
+  kubernetesApiAccess: #change CIDR blocks to restrict access
   - 0.0.0.0/0
   - ::/0
-  kubernetesVersion: 1.35.3
-  masterPublicName: api.pennedbyarjun.blog
-  networkCIDR: 172.20.0.0/16
+  kubernetesVersion: 1.35.3 #change to desired Kubernetes version
+  masterPublicName: api.pennedbyarjun.blog #change to your domain (api.yourdomain.com)
+  networkCIDR: 172.20.0.0/16 #change to your desired VPC CIDR block
   networking:
     calico: {}
-  nonMasqueradeCIDR: 100.64.0.0/10
-  sshAccess:
+  nonMasqueradeCIDR: 100.64.0.0/10 #change CIDR if needed for your network configuration
+  sshAccess: #change CIDR blocks to restrict SSH access
   - 0.0.0.0/0
   - ::/0
   subnets:
-  - cidr: 172.20.0.0/18
-    name: us-east-1a
+  - cidr: 172.20.0.0/18 #change subnet CIDR accordingly
+    name: us-east-1a #change to your subnet name
     type: Public
-    zone: us-east-1a
-  - cidr: 172.20.64.0/18
-    name: us-east-1b
+    zone: us-east-1a #change to your availability zone
+  - cidr: 172.20.64.0/18 #change subnet CIDR accordingly
+    name: us-east-1b #change to your subnet name
     type: Public
-    zone: us-east-1b
-  - cidr: 172.20.128.0/18
-    name: us-east-1c
+    zone: us-east-1b #change to your availability zone
+  - cidr: 172.20.128.0/18 #change subnet CIDR accordingly
+    name: us-east-1c #change to your subnet name
     type: Public
-    zone: us-east-1c
+    zone: us-east-1c #change to your availability zone
   topology:
     dns:
       type: Public
@@ -70,17 +70,17 @@ apiVersion: kops.k8s.io/v1alpha2
 kind: InstanceGroup
 metadata:
   labels:
-    kops.k8s.io/cluster: pennedbyarjun.blog
-  name: control-plane-us-east-1a
+    kops.k8s.io/cluster: pennedbyarjun.blog #change to your cluster name
+  name: control-plane-us-east-1a #change to your instance group name
 spec:
-  image: 099720109477/ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20260218
-  machineType: t3.medium
-  maxSize: 1
-  minSize: 1
+  image: 099720109477/ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20260218 #change to your desired AMI
+  machineType: t3.medium #change to your desired instance type
+  maxSize: 1 #change to your desired max number of instances
+  minSize: 1 #change to your desired min number of instances
   role: Master
-  rootVolumeSize: 15
+  rootVolumeSize: 15 #change to your desired root volume size in GB
   subnets:
-  - us-east-1a
+  - us-east-1a #change to your subnet name
 
 ---
 
@@ -88,17 +88,17 @@ apiVersion: kops.k8s.io/v1alpha2
 kind: InstanceGroup
 metadata:
   labels:
-    kops.k8s.io/cluster: pennedbyarjun.blog
-  name: nodes-us-east-1a
+    kops.k8s.io/cluster: pennedbyarjun.blog #change to your cluster name
+  name: nodes-us-east-1a #change to your node instance group name
 spec:
-  image: 099720109477/ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20260218
-  machineType: t3.medium
-  maxSize: 1
-  minSize: 1
+  image: 099720109477/ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20260218 #change to your desired AMI
+  machineType: t3.medium #change to your desired instance type
+  maxSize: 1 #change to your desired max number of instances
+  minSize: 1 #change to your desired min number of instances
   role: Node
-  rootVolumeSize: 15
+  rootVolumeSize: 15 #change to your desired root volume size in GB
   subnets:
-  - us-east-1a
+  - us-east-1a #change to your subnet name
 
 ---
 
@@ -106,17 +106,17 @@ apiVersion: kops.k8s.io/v1alpha2
 kind: InstanceGroup
 metadata:
   labels:
-    kops.k8s.io/cluster: pennedbyarjun.blog
-  name: nodes-us-east-1b
+    kops.k8s.io/cluster: pennedbyarjun.blog #change to your cluster name
+  name: nodes-us-east-1b #change to your node instance group name
 spec:
-  image: 099720109477/ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20260218
-  machineType: t3.medium
-  maxSize: 1
-  minSize: 1
+  image: 099720109477/ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20260218 #change to your desired AMI
+  machineType: t3.medium #change to your desired instance type
+  maxSize: 1 #change to your desired max number of instances
+  minSize: 1 #change to your desired min number of instances
   role: Node
-  rootVolumeSize: 15
+  rootVolumeSize: 15 #change to your desired root volume size in GB
   subnets:
-  - us-east-1b
+  - us-east-1b #change to your subnet name
 
 ---
 
@@ -124,17 +124,17 @@ apiVersion: kops.k8s.io/v1alpha2
 kind: InstanceGroup
 metadata:
   labels:
-    kops.k8s.io/cluster: pennedbyarjun.blog
-  name: nodes-us-east-1c
+    kops.k8s.io/cluster: pennedbyarjun.blog #change to your cluster name
+  name: nodes-us-east-1c #change to your node instance group name
 spec:
-  image: 099720109477/ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20260218
-  machineType: t3.medium
-  maxSize: 1
-  minSize: 1
+  image: 099720109477/ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20260218 #change to your desired AMI
+  machineType: t3.medium #change to your desired instance type
+  maxSize: 1 #change to your desired max number of instances
+  minSize: 1 #change to your desired min number of instances
   role: Node
-  rootVolumeSize: 15
+  rootVolumeSize: 15 #change to your desired root volume size in GB
   subnets:
-  - us-east-1c
+  - us-east-1c #change to your subnet name
 
 ---
 
@@ -142,7 +142,7 @@ apiVersion: kops.k8s.io/v1alpha2
 kind: SSHCredential
 metadata:
   labels:
-    kops.k8s.io/cluster: pennedbyarjun.blog
+    kops.k8s.io/cluster: pennedbyarjun.blog #change to your cluster name
   name: admin
 spec:
-  publicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPF9K7LDH7fSaXgtVVDbQm4K3nlWgfc7PZHpIfjAPpAH
+  publicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPF9K7LDH7fSaXgtVVDbQm4K3nlWgfc7PZHpIfjAPpAH #change to your public SSH key
